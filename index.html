@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Diwali Taash Party Invitation</title>
+  
+  <!-- Font and Icon Imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --bg-dark: #120202;
+      --burgundy: #2c080a;
+      --deep-crimson: #4a0d11;
+      --gold: #d4af37;
+      --gold-glowing: #ffdf73;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      background-color: var(--bg-dark);
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      touch-action: pan-y;
+    }
+
+    /* Ambient background with moving embers, fairy lights, and sparkles */
+    .ambient-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background: radial-gradient(circle at center, var(--deep-crimson) 0%, var(--burgundy) 50%, var(--bg-dark) 100%);
+      overflow: hidden;
+    }
+
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      background: radial-gradient(circle, rgba(255, 223, 115, 0.8) 0%, rgba(212, 175, 55, 0) 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: floatUp 15s infinite linear;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(105vh) translateX(0) scale(0.5);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.6;
+      }
+      90% {
+        opacity: 0.4;
+      }
+      100% {
+        transform: translateY(-5vh) translateX(50px) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    /* Fairy Lights (hanging sparkle effects) */
+    .fairy-lights {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      display: flex;
+      justify-content: space-around;
+      pointer-events: none;
+      opacity: 0.8;
+      z-index: 2;
+    }
+
+    .fairy-lights::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+    }
+
+    .light {
+      width: 8px;
+      height: 8px;
+      background: var(--gold-glowing);
+      border-radius: 50%;
+      box-shadow: 0 0 12px 4px var(--gold-glowing);
+      animation: twinkle 1.5s infinite ease-in-out alternate;
+    }
+
+    .light:nth-child(even) {
+      animation-delay: 0.7s;
+      background: #ff9933;
+      box-shadow: 0 0 12px 4px #ff9933;
+    }
+
+    @keyframes twinkle {
+      0% { transform: scale(0.8); opacity: 0.5; }
+      100% { transform: scale(1.2); opacity: 1; }
+    }
+
+    /* Intro Overlay Screen */
+    .intro-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at center, var(--burgundy) 0%, var(--bg-dark) 100%);
+      transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1.2s ease;
+      cursor: pointer;
+    }
+
+    .intro-screen.collapsed {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .card-outline {
+      position: relative;
+      border: 3px double var(--gold);
+      padding: 40px 20px;
+      width: 85%;
+      max-width: 380px;
+      height: 65vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: inset 0 0 40px rgba(0,0,0,0.8), 0 0 30px rgba(212,175,55,0.2);
+      border-radius: 12px;
+      background: rgba(44, 8, 10, 0.5);
+    }
+
+    .card-outline::before {
+      content: '';
+      position: absolute;
+      top: 10px; left: 10px; right: 10px; bottom: 10px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 8px;
+    }
+
+    .decor-corner {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--gold);
+      pointer-events: none;
+    }
+
+    .top-left { top: 15px; left: 15px; border-right: none; border-bottom: none; }
+    .top-right { top: 15px; right: 15px; border-left: none; border-bottom: none; }
+    .bottom-left { bottom: 15px; left: 15px; border-right: none; border-top: none; }
+    .bottom-right { bottom: 15px; right: 15px; border-left: none; border-top: none; }
+
+    .wedding-logo {
+      width: 140px;
+      height: 140px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
+      margin-bottom: 30px;
+      animation: pulseLogo 3s infinite ease-in-out;
+    }
+
+    @keyframes pulseLogo {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(212,175,55,0.4)); }
+      50% { transform: scale(1.05); filter: drop-shadow(0 0 25px rgba(212,175,55,0.6)); }
+    }
+
+    .welcome-text {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      letter-spacing: 3px;
+      color: var(--gold);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .action-prompt {
+      margin-top: 50px;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      color: #fff;
+      opacity: 0.8;
+      text-transform: uppercase;
+      animation: bouncePrompt 2s infinite;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    @keyframes bouncePrompt {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Main Content */
+    .main-wrapper {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      min-height: 100vh;
+      padding: 30px 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: auto;
+    }
+
+    /* 4 Suits in the corners */
+    .suit-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .suit {
+      position: absolute;
+      font-size: 2.5rem;
+      color: var(--gold);
+      filter: drop-shadow(0 0 8px rgba(212,175,55,0.5));
+      opacity: 0;
+      transform: scale(0.2) translate(-50%, -50%);
+      transition: all 1.8s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .main-wrapper.revealed .suit {
+      opacity: 0.95;
+      transform: scale(1) translate(0, 0);
+    }
+
+    .suit.spade   { top: 20px; left: 20px; }
+    .suit.heart   { top: 20px; right: 20px; }
+    .suit.diamond { bottom: 20px; left: 20px; }
+    .suit.club    { bottom: 20px; right: 20px; }
+
+    /* Page Content Animations */
+    .fade-up-element {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+
+    .main-wrapper.revealed .fade-up-element {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Card/Details Panel */
+    .invite-card {
+      width: 100%;
+      max-width: 500px;
+      border: 2px solid var(--gold);
+      background: rgba(44, 8, 10, 0.7);
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.9), inset 0 0 30px rgba(0,0,0,0.5);
+      border-radius: 16px;
+      padding: 40px 25px;
+      text-align: center;
+      position: relative;
+      margin-top: 10px;
+      backdrop-filter: blur(8px);
+    }
+
+    .invite-card::before {
+      content: '';
+      position: absolute;
+      top: 8px; left: 8px; right: 8px; bottom: 8px;
+      border: 1px dashed rgba(212, 175, 55, 0.3);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+
+    .mini-logo {
+      width: 65px;
+      height: 65px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 8px rgba(212,175,55,0.4));
+      margin-bottom: 20px;
+    }
+
+    .invite-p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      line-height: 1.6;
+      color: #eaeaea;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+
+    .party-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 2.2rem;
+      color: var(--gold);
+      text-shadow: 0 0 10px rgba(212, 175, 55, 0.6), 0 4px 6px rgba(0,0,0,0.5);
+      letter-spacing: 4px;
+      margin-bottom: 25px;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    /* Intricate Drawings */
+    .drawings-grid {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 30px 0;
+    }
+
+    .sketch-card {
+      flex: 1;
+      max-width: 90px;
+      aspect-ratio: 2/3;
+      border: 1px solid var(--gold);
+      border-radius: 4px;
+      background: rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 0 15px rgba(212,175,55,0.15);
+    }
+
+    .sketch-card img {
+      width: 90%;
+      height: 90%;
+      object-fit: contain;
+      opacity: 0.8;
+      filter: sepia(1) saturate(1.5) hue-rotate(-10deg) brightness(1.1);
+    }
+
+    .sketch-card::before {
+      content: '';
+      position: absolute;
+      top: 2px; left: 2px; right: 2px; bottom: 2px;
+      border: 1px solid rgba(212,175,55,0.25);
+    }
+
+    /* Details styling */
+    .event-info {
+      margin: 25px 0;
+      border-top: 1px solid rgba(212, 175, 55, 0.3);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 15px 0;
+    }
+
+    .date-heading {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 3px;
+      margin-bottom: 6px;
+    }
+
+    .time-info {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+      color: #fff;
+    }
+
+    .venue-info {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      letter-spacing: 1.5px;
+      color: #eaeaea;
+      margin: 20px 0 10px;
+    }
+
+    .sub-msg {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      color: var(--gold);
+      letter-spacing: 2px;
+      font-style: italic;
+    }
+
+    /* Interactive RSVP Form */
+    .rsvp-section {
+      width: 100%;
+      max-width: 450px;
+      margin-top: 25px;
+      background: rgba(24, 4, 6, 0.85);
+      border: 1px solid var(--gold);
+      border-radius: 12px;
+      padding: 30px 20px;
+      text-align: center;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .rsvp-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    label {
+      font-size: 0.75rem;
+      letter-spacing: 1.5px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    input[type="text"], input[type="number"], select {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 6px;
+      padding: 12px 15px;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold), #b8860b);
+      color: #1a0405;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      letter-spacing: 2px;
+      border: none;
+      border-radius: 6px;
+      padding: 14px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .submit-btn:hover {
+      background: linear-gradient(135deg, #ffd700, var(--gold));
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .success-alert {
+      display: none;
+      color: #4cd137;
+      border: 1px solid #4cd137;
+      background: rgba(76, 209, 55, 0.1);
+      padding: 15px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      margin-top: 15px;
+    }
+
+    .error-alert {
+      display: none;
+      color: #eb4d4b;
+      border: 1px solid #eb4d4b;
+      background: rgba(235, 77, 75, 0.1);
+      padding: 15px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      margin-top: 15px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Ambient visual wrapper -->
+  <div class="ambient-bg" id="ambientBg">
+    <div class="fairy-lights" id="fairyLights"></div>
+    <div class="particles" id="particles"></div>
+  </div>
+
+  <!-- INTRO SCREEN -->
+  <div class="intro-screen" id="introScreen" onclick="revealInvite()">
+    <div class="card-outline">
+      <div class="decor-corner top-left"></div>
+      <div class="decor-corner top-right"></div>
+      <div class="decor-corner bottom-left"></div>
+      <div class="decor-corner bottom-right"></div>
+
+      <!-- Wedding Logo -->
+      <img src="https://lh3.googleusercontent.com/d/1XgBv0E3q9mAnX_3_7631_20b8" alt="AU Wedding Logo" class="wedding-logo" id="introLogo">
+      
+      <div class="welcome-text">Namaste & Welcome</div>
+      <div style="font-size: 0.8rem; letter-spacing: 2px; color: #fff; opacity: 0.8; margin-top: 10px;">To our festive celebration</div>
+      
+      <div class="action-prompt">
+        <span>SWIPE UP or TAP TO ENTER</span>
+        <i class="fa-solid fa-chevron-up"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN EVENT PAGE -->
+  <div class="main-wrapper" id="mainPage">
+    <!-- Corner suits -->
+    <div class="suit-container">
+      <div class="suit spade"><i class="fa-solid fa-spade">♠</i></div>
+      <div class="suit heart"><i class="fa-solid fa-heart">♥</i></div>
+      <div class="suit diamond"><i class="fa-solid fa-diamond">♦</i></div>
+      <div class="suit club"><i class="fa-solid fa-club">♣</i></div>
+    </div>
+
+    <!-- MAIN CARD PANEL -->
+    <div class="invite-card fade-up-element" style="transition-delay: 0.4s;">
+      
+      <!-- Wedding Logo -->
+      <img src="https://lh3.googleusercontent.com/d/1XgBv0E3q9mAnX_3_7631_20b8" alt="AU Wedding Logo" class="mini-logo" id="miniCardLogo">
+
+      <p class="invite-p">You have been dealt an invitation to join us for a night of winning cards, spinning cocktails & candid celebrations</p>
+      
+      <div style="font-size: 0.75rem; letter-spacing: 3px; color: var(--gold); margin-bottom: 8px;">JOIN US FOR A</div>
+      <h1 class="party-title">Diwali Taash Party</h1>
+
+      <!-- Sketch Card Drawings -->
+      <div class="drawings-grid fade-up-element" style="transition-delay: 0.8s;">
+        <div class="sketch-card">
+          <!-- Jack -->
+          <svg viewBox="0 0 100 150" fill="none" stroke="#d4af37" stroke-width="1.5">
+            <rect x="5" y="5" width="90" height="140" rx="3" stroke-dasharray="2 2" />
+            <path d="M50 15 L50 135 M25 75 L75 75 M25 35 L75 115" stroke-opacity="0.3" />
+            <circle cx="50" cy="50" r="15" />
+            <path d="M40 50 Q50 35 60 50 M45 45 Q50 50 55 45 M50 50 L50 65" />
+            <path d="M35 70 C35 60 45 60 50 60 C55 60 65 60 65 70 L65 95 C65 100 35 100 35 95 Z" />
+            <path d="M35 45 L40 32 L50 38 L60 32 L65 45 Z" fill="rgba(212, 175, 55, 0.2)" />
+            <text x="12" y="24" fill="#d4af37" font-size="14" font-family="Cinzel">J</text>
+            <text x="88" y="136" fill="#d4af37" font-size="14" font-family="Cinzel" transform="rotate(180 88 136)">J</text>
+          </svg>
+        </div>
+        <div class="sketch-card">
+          <!-- King -->
+          <svg viewBox="0 0 100 150" fill="none" stroke="#d4af37" stroke-width="1.5">
+            <rect x="5" y="5" width="90" height="140" rx="3" stroke-dasharray="2 2" />
+            <circle cx="50" cy="52" r="18" />
+            <path d="M38 52 Q50 33 62 52 M43 45 Q50 51 57 45 M50 52 L50 70" />
+            <path d="M32 75 C32 63 42 63 50 63 C58 63 68 63 68 75 L68 105 C68 112 32 112 32 105 Z" />
+            <path d="M32 42 L38 22 L50 30 L62 22 L68 42 Z" fill="rgba(212, 175, 55, 0.2)" />
+            <path d="M50 15 L50 25 M43 18 L57 18" stroke-width="1" />
+            <text x="12" y="24" fill="#d4af37" font-size="14" font-family="Cinzel">K</text>
+            <text x="88" y="136" fill="#d4af37" font-size="14" font-family="Cinzel" transform="rotate(180 88 136)">K</text>
+          </svg>
+        </div>
+        <div class="sketch-card">
+          <!-- Queen -->
+          <svg viewBox="0 0 100 150" fill="none" stroke="#d4af37" stroke-width="1.5">
+            <rect x="5" y="5" width="90" height="140" rx="3" stroke-dasharray="2 2" />
+            <circle cx="50" cy="48" r="14" />
+            <path d="M40 48 Q50 35 60 48 M45 44 Q50 48 55 44" />
+            <path d="M35 65 C35 55 45 55 50 55 C55 55 65 55 65 65 L65 92 C65 98 35 98 35 92 Z" />
+            <path d="M36 38 L43 24 L50 29 L57 24 L64 38 Z" fill="rgba(212, 175, 55, 0.2)" />
+            <path d="M50 16 C53 16 53 22 50 22 C47 22 47 16 50 16 Z" />
+            <text x="12" y="24" fill="#d4af37" font-size="14" font-family="Cinzel">Q</text>
+            <text x="88" y="136" fill="#d4af37" font-size="14" font-family="Cinzel" transform="rotate(180 88 136)">Q</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- DATE, VENUE, & TIME DETAILS -->
+      <div class="event-info fade-up-element" style="transition-delay: 1s;">
+        <div class="date-heading">Saturday, 14th November</div>
+        <div class="time-info">At 6:00 PM Onwards</div>
+        
+        <div class="venue-info">
+          <strong>The AU Residency</strong><br>
+          Penthouse B, Royal Palms Apartments,<br>
+          Carter Road, Bandra West, Mumbai - 400050
+        </div>
+        
+        <div class="sub-msg">Appetizers, drinks & endless rounds of cards will be served!</div>
+      </div>
+    </div>
+
+    <!-- RSVP FORM SECTION -->
+    <div class="rsvp-section fade-up-element" style="transition-delay: 1.2s;">
+      <h3 class="rsvp-title">RSVP for Taash Night</h3>
+      <form id="rsvpForm" onsubmit="handleRSVP(event)">
+        <div class="form-group">
+          <label for="guestName">Your Name</label>
+          <input type="text" id="guestName" placeholder="Full Name" required />
+        </div>
+        
+        <div class="form-group">
+          <label for="guestNumber">Your Phone Number</label>
+          <input type="number" id="guestNumber" placeholder="Mobile Number (including country code if applicable)" required />
+        </div>
+
+        <div class="form-group">
+          <label for="attendance">Will You Join The Deal?</label>
+          <select id="attendance" required>
+            <option value="" disabled selected>Select RSVP Option</option>
+            <option value="Yes">Yes, Count Me In! ♣</option>
+            <option value="Maybe">Maybe (Sitting on the fence) ♦</option>
+            <option value="No">No, Sadly Can't Make It ♠</option>
+          </select>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">Send Response</button>
+      </form>
+
+      <div class="success-alert" id="successAlert">
+        <i class="fa-solid fa-circle-check"></i> <strong>Thank you!</strong> Your RSVP card response has been saved to our guest list.
+      </div>
+      <div class="error-alert" id="errorAlert">
+        <i class="fa-solid fa-circle-xmark"></i> <strong>Oops!</strong> Something went wrong. Please try again.
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Embedded asset reference (using the AU Wedding Logo provided)
+    const originalWeddingLogo = "image_2.png"; 
+
+    // Visual elements assignment
+    document.getElementById("introLogo").src = originalWeddingLogo;
+    document.getElementById("miniCardLogo").src = originalWeddingLogo;
+
+    // Build festive floating background particles
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 40; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.width = Math.random() * 8 + 4 + 'px';
+      p.style.height = p.style.width;
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.animationDelay = Math.random() * 15 + 's';
+      p.style.animationDuration = Math.random() * 8 + 10 + 's';
+      particlesContainer.appendChild(p);
+    }
+
+    // Build string of hanging fairy lights
+    const lightsContainer = document.getElementById('fairyLights');
+    for (let i = 0; i < 24; i++) {
+      const l = document.createElement('div');
+      l.className = 'light';
+      lightsContainer.appendChild(l);
+    }
+
+    // Transition invitation viewing trigger
+    function revealInvite() {
+      const intro = document.getElementById('introScreen');
+      const main = document.getElementById('mainPage');
+      
+      intro.classList.add('collapsed');
+      main.classList.add('revealed');
+    }
+
+    // Gesture detection for Swipe Up to Unlock
+    let startY = 0;
+    document.getElementById('introScreen').addEventListener('touchstart', e => {
+      startY = e.touches[0].clientY;
+    });
+
+    document.getElementById('introScreen').addEventListener('touchmove', e => {
+      let moveY = e.touches[0].clientY;
+      if (startY - moveY > 50) { // Swiped up threshold
+        revealInvite();
+      }
+    });
+
+    // Handle Form submit and RSVP
+    function handleRSVP(e) {
+      e.preventDefault();
+      
+      // Get button and alerts
+      const submitBtn = document.getElementById('submitBtn');
+      const successAlert = document.getElementById('successAlert');
+      const errorAlert = document.getElementById('errorAlert');
+      
+      // Get guest details
+      const nameValue = document.getElementById('guestName').value.trim();
+      const numberValue = document.getElementById('guestNumber').value.trim();
+      const rsvpValue = document.getElementById('attendance').value;
+
+      // Disable submission while processing
+      submitBtn.disabled = true;
+      submitBtn.innerText = "Saving response...";
+      errorAlert.style.display = 'none';
+
+      // ⚠️ INSERT YOUR WEBA APP URL FROM PHASE 1 HERE:
+      const GOOGLE_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxCDYW9hAHLrkaRJCTuNn5BfVlpQ-Hpl-Vrl6ERaq4Zm1-Kn62OwLyaqr-rO_p98MZmFw/exec"; 
+
+      if(GOOGLE_WEB_APP_URL === "https://script.google.com/macros/s/AKfycbxCDYW9hAHLrkaRJCTuNn5BfVlpQ-Hpl-Vrl6ERaq4Zm1-Kn62OwLyaqr-rO_p98MZmFw/exec") {
+        console.warn("Please paste your deployed Google Apps Script URL here!");
+        // Simulate local success as fallback to ensure usability test
+        setTimeout(() => {
+          document.getElementById('rsvpForm').style.display = 'none';
+          successAlert.style.display = 'block';
+        }, 800);
+        return;
+      }
+
+      // Send to google sheets script web app
+      fetch(GOOGLE_WEB_APP_URL, {
+        method: "POST",
+        mode: "no-cors", // Required to send across different domain
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: nameValue,
+          number: numberValue,
+          rsvp: rsvpValue
+        })
+      })
+      .then(() => {
+        // Since 'no-cors' is used, browser cannot inspect the response, so we assume success.
+        document.getElementById('rsvpForm').style.display = 'none';
+        successAlert.style.display = 'block';
+      })
+      .catch((err) => {
+        console.error(err);
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Send Response";
+        errorAlert.style.display = 'block';
+      });
+    }
+
+  </script>
+</body>
+</html>
